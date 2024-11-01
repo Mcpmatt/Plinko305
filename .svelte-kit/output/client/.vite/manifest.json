@@ -1,0 +1,142 @@
+{
+  ".svelte-kit/generated/client-optimized/app.js": {
+    "file": "_app/immutable/entry/app.CAenIa_r.js",
+    "name": "entry/app",
+    "src": ".svelte-kit/generated/client-optimized/app.js",
+    "isEntry": true,
+    "imports": [
+      "_scheduler.qUdTNcd4.js",
+      "_index.CwLSBawM.js"
+    ],
+    "dynamicImports": [
+      ".svelte-kit/generated/client-optimized/nodes/0.js",
+      ".svelte-kit/generated/client-optimized/nodes/1.js",
+      ".svelte-kit/generated/client-optimized/nodes/2.js",
+      ".svelte-kit/generated/client-optimized/nodes/3.js",
+      ".svelte-kit/generated/client-optimized/nodes/4.js"
+    ]
+  },
+  ".svelte-kit/generated/client-optimized/nodes/0.js": {
+    "file": "_app/immutable/nodes/0.xeU3UyzI.js",
+    "name": "nodes/0",
+    "src": ".svelte-kit/generated/client-optimized/nodes/0.js",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_scheduler.qUdTNcd4.js",
+      "_index.CwLSBawM.js"
+    ],
+    "css": [
+      "_app/immutable/assets/0.DpmEpyNL.css"
+    ],
+    "assets": [
+      "_app/immutable/assets/og_image.PzHn9Bxz.jpg"
+    ]
+  },
+  ".svelte-kit/generated/client-optimized/nodes/1.js": {
+    "file": "_app/immutable/nodes/1.B81M6-Ej.js",
+    "name": "nodes/1",
+    "src": ".svelte-kit/generated/client-optimized/nodes/1.js",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_scheduler.qUdTNcd4.js",
+      "_index.CwLSBawM.js",
+      "_entry.B70M-z-j.js"
+    ]
+  },
+  ".svelte-kit/generated/client-optimized/nodes/2.js": {
+    "file": "_app/immutable/nodes/2.2U5Idzk5.js",
+    "name": "nodes/2",
+    "src": ".svelte-kit/generated/client-optimized/nodes/2.js",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_scheduler.qUdTNcd4.js",
+      "_index.CwLSBawM.js"
+    ]
+  },
+  ".svelte-kit/generated/client-optimized/nodes/3.js": {
+    "file": "_app/immutable/nodes/3.Cx0TY__y.js",
+    "name": "nodes/3",
+    "src": ".svelte-kit/generated/client-optimized/nodes/3.js",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_scheduler.qUdTNcd4.js",
+      "_index.CwLSBawM.js",
+      "_Plinko.BrtK7NtZ.js",
+      "_index.CdPqlD-_.js"
+    ],
+    "css": [
+      "_app/immutable/assets/3.Di7wuimg.css"
+    ],
+    "assets": [
+      "_app/immutable/assets/logo.Bq7oLjZC.svg"
+    ]
+  },
+  ".svelte-kit/generated/client-optimized/nodes/4.js": {
+    "file": "_app/immutable/nodes/4.BmtvQTFQ.js",
+    "name": "nodes/4",
+    "src": ".svelte-kit/generated/client-optimized/nodes/4.js",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_scheduler.qUdTNcd4.js",
+      "_index.CwLSBawM.js",
+      "_Plinko.BrtK7NtZ.js"
+    ]
+  },
+  "_Plinko.BrtK7NtZ.js": {
+    "file": "_app/immutable/chunks/Plinko.BrtK7NtZ.js",
+    "name": "Plinko",
+    "imports": [
+      "_scheduler.qUdTNcd4.js",
+      "_index.CwLSBawM.js",
+      "_index.CdPqlD-_.js"
+    ]
+  },
+  "_entry.B70M-z-j.js": {
+    "file": "_app/immutable/chunks/entry.B70M-z-j.js",
+    "name": "entry",
+    "imports": [
+      "_scheduler.qUdTNcd4.js",
+      "_index.CdPqlD-_.js"
+    ]
+  },
+  "_index.CdPqlD-_.js": {
+    "file": "_app/immutable/chunks/index.CdPqlD-_.js",
+    "name": "index",
+    "imports": [
+      "_scheduler.qUdTNcd4.js"
+    ]
+  },
+  "_index.CwLSBawM.js": {
+    "file": "_app/immutable/chunks/index.CwLSBawM.js",
+    "name": "index",
+    "imports": [
+      "_scheduler.qUdTNcd4.js"
+    ]
+  },
+  "_scheduler.qUdTNcd4.js": {
+    "file": "_app/immutable/chunks/scheduler.qUdTNcd4.js",
+    "name": "scheduler"
+  },
+  "node_modules/@sveltejs/kit/src/runtime/client/entry.js": {
+    "file": "_app/immutable/entry/start.Blfk3rN7.js",
+    "name": "entry/start",
+    "src": "node_modules/@sveltejs/kit/src/runtime/client/entry.js",
+    "isEntry": true,
+    "imports": [
+      "_entry.B70M-z-j.js"
+    ]
+  },
+  "src/lib/assets/logo.svg": {
+    "file": "_app/immutable/assets/logo.Bq7oLjZC.svg",
+    "src": "src/lib/assets/logo.svg"
+  },
+  "src/lib/assets/og_image.jpg": {
+    "file": "_app/immutable/assets/og_image.PzHn9Bxz.jpg",
+    "src": "src/lib/assets/og_image.jpg"
+  }
+}
