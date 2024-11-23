@@ -2,10 +2,10 @@ import { RiskLevel } from '$lib/types';
 import { getBinColors } from '$lib/utils/colors';
 import { computeBinProbabilities } from '$lib/utils/numbers';
 
-export const USE_LOCAL_STORAGE = false;  // Add this flag
+
 
 export const LOCAL_STORAGE_KEY = {
-  BALANCE: 'plinko_balance',
+  //BALANCE: 'plinko_balance',
   SETTINGS: {
     ANIMATION: 'plinko_settings_animation',
   },
