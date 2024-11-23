@@ -7,6 +7,7 @@ import {
   balance,
   betAmountOfExistingBalls,
   totalProfitHistory,
+  isCashingOut
 } from '$lib/stores/game';
 import type { RiskLevel, RowCount } from '$lib/types';
 import { getRandomBetween } from '$lib/utils/numbers';
@@ -43,6 +44,8 @@ class PlinkoEngine {
    */
   private riskLevel: RiskLevel;
 
+  private currentBalance: number;
+
   private engine: Matter.Engine;
   private render: Matter.Render;
   private runner: Matter.Runner;
@@ -69,6 +72,8 @@ class PlinkoEngine {
    */
   private pinsLastRowXCoords: number[] = [];
 
+  private activeBalls: Set<string> = new Set(); // Track active balls by ID
+  
   static WIDTH = 760;
   static HEIGHT = 570;
 
@@ -115,9 +120,13 @@ class PlinkoEngine {
     this.betAmount = get(betAmount);
     this.rowCount = get(rowCount);
     this.riskLevel = get(riskLevel);
+    this.currentBalance = get(balance);
+
+    // Subscribe to store changes
     betAmount.subscribe((value) => (this.betAmount = value));
     rowCount.subscribe((value) => this.updateRowCount(value));
     riskLevel.subscribe((value) => (this.riskLevel = value));
+    balance.subscribe((value)) => (this.currentBalance = value));
 
     this.engine = Matter.Engine.create({
       timing: {
@@ -177,12 +186,24 @@ class PlinkoEngine {
   stop() {
     Matter.Render.stop(this.render);
     Matter.Runner.stop(this.runner);
+    this.removeAllBalls();
   }
 
   /**
    * Drops a new ball from the top with a random horizontal offset, and deducts the balance.
    */
   dropBall() {
+    // Check if currently cashing out
+    if (get(isCashingOut)) {
+      return;
+    }
+
+    // Verify sufficient balance
+    if (this.currentBalance < this.betAmount) {
+      console.warn('Insufficient balance to place bet');
+      return;
+    }
+    
     const ballOffsetRangeX = this.pinDistanceX * 0.8;
     const ballRadius = this.pinRadius * 2;
     const { friction, frictionAirByRowCount } = PlinkoEngine.ballFrictions;
@@ -208,7 +229,9 @@ class PlinkoEngine {
       },
     );
     Matter.Composite.add(this.engine.world, ball);
+    this.activeBalls.add(ball.id.toString());
 
+    // Update Stores
     betAmountOfExistingBalls.update((value) => ({ ...value, [ball.id]: this.betAmount }));
     balance.update((balance) => balance - this.betAmount);
   }
@@ -253,6 +276,12 @@ class PlinkoEngine {
    * Called when a ball hits the invisible sensor at the bottom.
    */
   private handleBallEnterBin(ball: Matter.Body) {
+
+    const ballId = ball.id.toString();
+    if (!this.activeBalls.has(ballId)) {
+      return; // Ignore if ball already processed
+    }
+    
     const binIndex = this.pinsLastRowXCoords.findLastIndex((pinX) => pinX < ball.position.x);
     if (binIndex !== -1 && binIndex < this.pinsLastRowXCoords.length - 1) {
       const betAmount = get(betAmountOfExistingBalls)[ball.id] ?? 0;
@@ -274,13 +303,16 @@ class PlinkoEngine {
           profit,
         },
       ]);
+      // Update total profit history
       totalProfitHistory.update((history) => {
         const lastTotalProfit = history.slice(-1)[0];
         return [...history, lastTotalProfit + profit];
       });
+      // Update balance with winnings
       balance.update((balance) => balance + payoutValue);
     }
-
+    // CLean Up
+    this.activeBalls.delete(ballId);
     Matter.Composite.remove(this.engine.world, ball);
     betAmountOfExistingBalls.update((value) => {
       const newValue = { ...value };
@@ -376,6 +408,7 @@ class PlinkoEngine {
         Matter.Composite.remove(this.engine.world, body);
       }
     });
+    this.activeBalls.clear();
     betAmountOfExistingBalls.set({});
   }
 }
