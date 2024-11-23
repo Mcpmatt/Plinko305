@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { balance, isCashingOut, cashOutError } from './game';  // Import from your store
+  import { balance, isCashingOut, cashOutError } from '$lib/stores/game';  // Import from your store
 
   let showCashOut = false;
 
