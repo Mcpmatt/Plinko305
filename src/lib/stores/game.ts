@@ -17,7 +17,6 @@ const getInitialBalance = () => {
   if (typeof window !== 'undefined') {
     const urlParams = new URLSearchParams(window.location.search);
     const tokenParam = urlParams.get('tokens');
-    Materialize.toast(`Initial tokens: ${tokenParam}`, 3000);
     return tokenParam ? parseInt(tokenParam, 10) : 200;
   }
   return 200;
