@@ -14,9 +14,11 @@ export const plinkoEngine = writable<PlinkoEngine | null>(null);
 
 // Initialize balance from URL parameter instead of hardcoded value
 const getInitialBalance = () => {
+  alert('A. game.ts getInitialBalance called');
   if (typeof window !== 'undefined') {
     const urlParams = new URLSearchParams(window.location.search);
     const tokenParam = urlParams.get('tokens');
+    alert(`B. game.ts token param: ${tokenParam}`);
     return tokenParam ? parseInt(tokenParam, 10) : 200;
   }
   return 200;
@@ -30,14 +32,15 @@ export const isCashingOut = writable<boolean>(false);
 export const cashOutError = writable<string | null>(null);
 
 // Cash out function
-export const handleCashOut = async () => {
-  const currentBalance = get(balance);
-  
+export const handleCashOut = async () => {  
   if (typeof window === 'undefined') return;
   
   const urlParams = new URLSearchParams(window.location.search);
   const cloudFunctionUrl = urlParams.get('cloudFunction');
   const userId = urlParams.get('uid');
+  // Get and parse balance properly
+  const currentBalance = get(balance);
+  const finalBalance = Math.floor(parseInt(currentBalance, 10));
 
   if (!cloudFunctionUrl || !userId) {
     cashOutError.set('Missing required parameters for cash out');
@@ -57,7 +60,7 @@ export const handleCashOut = async () => {
       },
       body: JSON.stringify({
         uid: userId,
-        finalBalance: currentBalance,
+        finalBalance: finalBalance,
         has_cashed_out_plinko: true  // Updated to use Plinko-specific flag
       })
     });
