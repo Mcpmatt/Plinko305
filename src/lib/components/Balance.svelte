@@ -9,7 +9,7 @@
     const urlParams = new URLSearchParams(window.location.search);
     const tokenParam = urlParams.get('tokens');
     if (tokenParam) {
-      $balance = parseFloat(tokenParam);  // Update the store value using $balance
+      $balance = parseInt(tokenParam);  // Update the store value using $balance
     }
     // Check if we should show cash out button
     showCashOut = Boolean(urlParams.get('cloudFunction') && urlParams.get('uid'));
