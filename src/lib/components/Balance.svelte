@@ -10,8 +10,14 @@
     const tokenParam = urlParams.get('tokens');
     
     if (tokenParam) {
-      $balance = parseInt(tokenParam);  // Update the store value using $balance
-      alert(`Parsed token value: ${$balance}`);  // For debugging
+      const parsedBalance = parseInt(tokenParam, 10);
+        alert(`Setting balance to: ${parsedBalance}`);  // First alert
+        $balance = parsedBalance;
+        
+        // Add second alert to verify the store updated
+        setTimeout(() => {
+            alert(`Current balance after set: ${$balance}`);
+        }, 100);
     }
     // Check if we should show cash out button
     showCashOut = Boolean(urlParams.get('cloudFunction') && urlParams.get('uid'));
