@@ -22,6 +22,9 @@ const getInitialBalance = () => {
   return 200;
 };
 
+// Create and export the balance store
+export const balance = writable<number>(getInitialBalance());
+
 // Add stores for cash out functionality
 export const isCashingOut = writable<boolean>(false);
 export const cashOutError = writable<string | null>(null);
@@ -80,7 +83,7 @@ export const handleCashOut = async () => {
 };
 
 
-export const betAmount = writable<number>(getInitialBalance());
+export const betAmount = writable<number>(1);
 
 export const betAmountOfExistingBalls = writable<BetAmountOfExistingBalls>({});
 
