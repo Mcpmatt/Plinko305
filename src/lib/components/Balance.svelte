@@ -5,19 +5,16 @@
   let showCashOut = false;
 
   onMount(() => {
-    // Get initial balance from URL parameter
+   alert('1. Balance.svelte onMount start');
     const urlParams = new URLSearchParams(window.location.search);
     const tokenParam = urlParams.get('tokens');
-    
+    alert(`2. Token param received: ${tokenParam}`);
+
     if (tokenParam) {
-      const parsedBalance = parseInt(tokenParam, 10);
-        alert(`Setting balance to: ${parsedBalance}`);  // First alert
+        const parsedBalance = parseInt(tokenParam, 10);
+        alert(`3. About to set balance to: ${parsedBalance}`);
         $balance = parsedBalance;
-        
-        // Add second alert to verify the store updated
-        setTimeout(() => {
-            alert(`Current balance after set: ${$balance}`);
-        }, 100);
+        alert(`4. Just set balance to: ${$balance}`);
     }
     // Check if we should show cash out button
     showCashOut = Boolean(urlParams.get('cloudFunction') && urlParams.get('uid'));
