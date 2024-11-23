@@ -66,11 +66,10 @@
   }
 
   function confirmCashOut() {
-    if (confirm(`Cash out ${$balance.toLocaleString('en-US')} 
-      tokens?`)) {
+    if (confirm(`Cash out ${$balance.toLocaleString('en-US')} tokens?`)) {
         handleCashOut();
     }
-  }
+}
 
   $: balanceFormatted = $balance.toLocaleString('en-US');
 </script>
