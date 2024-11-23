@@ -17,7 +17,7 @@ const getInitialBalance = () => {
   if (typeof window !== 'undefined') {
     const urlParams = new URLSearchParams(window.location.search);
     const tokenParam = urlParams.get('tokens');
-    return tokenParam ? parseFloat(tokenParam) : 200;
+    return tokenParam ? parseInt(tokenParam, 10) : 200;
   }
   return 200;
 };
