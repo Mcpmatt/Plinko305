@@ -12,7 +12,75 @@ import { derived, writable } from 'svelte/store';
 
 export const plinkoEngine = writable<PlinkoEngine | null>(null);
 
-export const betAmount = writable<number>(1);
+// Initialize balance from URL parameter instead of hardcoded value
+const getInitialBalance = () => {
+  if (typeof window !== 'undefined') {
+    const urlParams = new URLSearchParams(window.location.search);
+    const tokenParam = urlParams.get('tokens');
+    return tokenParam ? parseFloat(tokenParam) : 200;
+  }
+  return 200;
+};
+
+// Add stores for cash out functionality
+export const isCashingOut = writable<boolean>(false);
+export const cashOutError = writable<string | null>(null);
+
+// Cash out function
+export const handleCashOut = async () => {
+  const currentBalance = get(balance);
+  
+  if (typeof window === 'undefined') return;
+  
+  const urlParams = new URLSearchParams(window.location.search);
+  const cloudFunctionUrl = urlParams.get('cloudFunction');
+  const userId = urlParams.get('uid');
+
+  if (!cloudFunctionUrl || !userId) {
+    cashOutError.set('Missing required parameters for cash out');
+    return;
+  }
+
+  isCashingOut.set(true);
+  cashOutError.set(null);
+
+  try {
+    const response = await fetch(cloudFunctionUrl, {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        uid: userId,
+        finalBalance: currentBalance,
+        has_cashed_out_plinko: true  // Updated to use Plinko-specific flag
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(await response.text());
+    }
+
+    const data = await response.json();
+    
+    if (data.success) {
+      balance.set(0);
+      // Redirect back to app after successful cash out
+      window.location.href = 'fitness305casino://cash-out-complete';
+    } else {
+      throw new Error('Cash out failed');
+    }
+  } catch (error) {
+    cashOutError.set(error instanceof Error ? error.message : 'Cash out failed');
+  } finally {
+    isCashingOut.set(false);
+  }
+};
+
+
+export const betAmount = writable<number>(getInitialBalance());
 
 export const betAmountOfExistingBalls = writable<BetAmountOfExistingBalls>({});
 
@@ -37,7 +105,7 @@ export const totalProfitHistory = writable<number[]>([0]);
  * on every balance change. This prevents unnecessary writes to local storage, which can
  * be slow on low-end devices.
  */
-export const balance = writable<number>(200);
+//export const balance = writable<number>(200);
 
 /**
  * RGB colors for every bin. The length of the array is the number of bins.
