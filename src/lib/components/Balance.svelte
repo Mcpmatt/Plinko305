@@ -28,6 +28,9 @@
     const cloudFunctionUrl = urlParams.get('cloudFunction');
     const userId = urlParams.get('uid');
 
+    // Floor the final balance before sending
+    const finalBalance = Math.floor($balance);
+
     if (!cloudFunctionUrl || !userId) {
       $cashOutError = 'Missing required parameters for cash out';
       return;
@@ -46,7 +49,7 @@
         },
         body: JSON.stringify({
           uid: userId,
-          finalBalance: $balance,
+          finalBalance: finalBalance,   // Will always be a whole number
           has_cashed_out_plinko: true
         })
       });
