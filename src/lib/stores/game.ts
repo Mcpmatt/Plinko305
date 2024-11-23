@@ -14,11 +14,9 @@ export const plinkoEngine = writable<PlinkoEngine | null>(null);
 
 // Initialize balance from URL parameter instead of hardcoded value
 const getInitialBalance = () => {
-  alert('A. game.ts getInitialBalance called');
   if (typeof window !== 'undefined') {
     const urlParams = new URLSearchParams(window.location.search);
     const tokenParam = urlParams.get('tokens');
-    alert(`B. game.ts token param: ${tokenParam}`);
     return tokenParam ? parseInt(tokenParam, 10) : 200;
   }
   return 200;
