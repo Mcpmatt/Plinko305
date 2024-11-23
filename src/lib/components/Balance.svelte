@@ -92,7 +92,7 @@
     {#if showCashOut}
       <button
         on:click={confirmCashOut}
-        disabled={$isCashingOut || $balance <= 0}
+        disabled={$isCashingOut || $balance < 0}
         class="bg-green-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-green-500 active:bg-green-700 disabled:bg-gray-400 sm:text-base"
       >
         {$isCashingOut ? 'Processing...' : 'Cash Out'}
