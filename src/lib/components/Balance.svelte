@@ -63,18 +63,13 @@
   }
 
   function confirmCashOut() {
-    if (confirm(`Cash out ${$balance.toLocaleString('en-US', {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    })} tokens?`)) {
-      handleCashOut();
+    if (confirm(`Cash out ${$balance.toLocaleString('en-US')} 
+      tokens?`)) {
+        handleCashOut();
     }
   }
 
-  $: balanceFormatted = $balance.toLocaleString('en-US', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  });
+  $: balanceFormatted = $balance.toLocaleString('en-US');
 </script>
 
 <div class="flex flex-col">
