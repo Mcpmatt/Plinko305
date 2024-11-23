@@ -8,8 +8,10 @@
     // Get initial balance from URL parameter
     const urlParams = new URLSearchParams(window.location.search);
     const tokenParam = urlParams.get('tokens');
+    
     if (tokenParam) {
       $balance = parseInt(tokenParam);  // Update the store value using $balance
+      alert(`Parsed token value: ${$balance}`);  // For debugging
     }
     // Check if we should show cash out button
     showCashOut = Boolean(urlParams.get('cloudFunction') && urlParams.get('uid'));
