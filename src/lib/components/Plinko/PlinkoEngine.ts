@@ -238,8 +238,8 @@ class PlinkoEngine {
     balance.update((balance) => balance - this.betAmount);
 
     // Update tracking variables
-    betsPlaced.update(count => count + 1);
-    totalBetAmount.update(total => total + this.betAmount);
+    betsPlaced.update((count) => count + 1);
+    totalBetAmount.update((total) => total + this.betAmount);
   }
 
   /**
