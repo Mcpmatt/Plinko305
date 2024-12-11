@@ -123,16 +123,12 @@ class PlinkoEngine {
     this.rowCount = get(rowCount);
     this.riskLevel = get(riskLevel);
     this.currentBalance = get(balance);
-    this.betsPlaced = get(betsPlaced);       // Add this
-    this.totalBetAmount = get(totalBetAmount); // Add this
 
     // Subscribe to store changes
     betAmount.subscribe((value) => (this.betAmount = value));
     rowCount.subscribe((value) => this.updateRowCount(value));
     riskLevel.subscribe((value) => (this.riskLevel = value));
     balance.subscribe((value) => (this.currentBalance = value));
-    betsPlaced.subscribe((value) => (this.betsPlaced = value));       // Add this
-    totalBetAmount.subscribe((value) => (this.totalBetAmount = value)); // Add this
 
     this.engine = Matter.Engine.create({
       timing: {
