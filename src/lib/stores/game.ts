@@ -70,7 +70,7 @@ export const handleCashOut = async () => {
         finalBalance: finalBalance,
         has_cashed_out_plinko: true,  // Updated to use Plinko-specific flag
         // Updated to track bets/amounts placed
-        betsplaced: currentBetsPlaced,
+        betsPlaced: currentBetsPlaced,
         totalBetAmount: currentTotalBetAmount
       })
     });
