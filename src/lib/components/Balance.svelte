@@ -42,7 +42,9 @@
         body: JSON.stringify({
           uid: userId,
           finalBalance: finalBalance,   // Will always be a whole number
-          has_cashed_out_plinko: true
+          has_cashed_out_plinko: true,
+          betsPlaced: betsPlaced,
+          totalBetAmount: totalBetAmount
         })
       });
 
