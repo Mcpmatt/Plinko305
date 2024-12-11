@@ -7,7 +7,9 @@ import {
   balance,
   betAmountOfExistingBalls,
   totalProfitHistory,
-  isCashingOut
+  isCashingOut,
+  betsPlaced,
+  totalBetAmount
 } from '$lib/stores/game';
 import type { RiskLevel, RowCount } from '$lib/types';
 import { getRandomBetween } from '$lib/utils/numbers';
