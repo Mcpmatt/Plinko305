@@ -38,8 +38,6 @@ export const handleCashOut = async () => {
   
   // Get and parse balance properly
   const currentBalance = get(balance);
-  const currentBetsPlaced = get(betsPlaced);
-  const currentTotalBetAmount = get(totalBetAmount);
   
   if (typeof window === 'undefined') return;
   
@@ -70,8 +68,8 @@ export const handleCashOut = async () => {
         finalBalance: finalBalance,
         has_cashed_out_plinko: true,  // Updated to use Plinko-specific flag
         // Updated to track bets/amounts placed
-        betsPlaced: currentBetsPlaced,
-        totalBetAmount: currentTotalBetAmount
+        betsPlaced: betsPlaced,
+        totalBetAmount: totalBetAmount
       })
     });
 
