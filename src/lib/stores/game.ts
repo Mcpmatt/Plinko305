@@ -38,14 +38,19 @@ export const handleCashOut = async () => {
   
   // Get and parse balance properly
   const currentBalance = get(balance);
+  const currentBetsPlaced = get(betsPlaced);
+  const currentTotalBetAmount = get(totalBetAmount);
   
   if (typeof window === 'undefined') return;
   
   const urlParams = new URLSearchParams(window.location.search);
   const cloudFunctionUrl = urlParams.get('cloudFunction');
   const userId = urlParams.get('uid');
-  
+
+  // Parse and floor all numeric values
   const finalBalance = Math.floor(parseInt(currentBalance, 10));
+  const parsedBetsPlaced = Math.floor(parseInt(currentBetsPlaced, 10));
+  const parsedTotalBetAmount = Math.floor(parseInt(currentTotalBetAmount, 10));
 
   if (!cloudFunctionUrl || !userId) {
     cashOutError.set('Missing required parameters for cash out');
@@ -68,8 +73,8 @@ export const handleCashOut = async () => {
         finalBalance: finalBalance,
         has_cashed_out_plinko: true,  // Updated to use Plinko-specific flag
         // Updated to track bets/amounts placed
-        betsPlaced: betsPlaced,
-        totalBetAmount: totalBetAmount
+        betsPlaced: parsedBetsPlaced,
+        totalBetAmount: parsedTotalBetAmount
       })
     });
 
