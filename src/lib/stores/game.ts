@@ -38,6 +38,8 @@ export const handleCashOut = async () => {
   
   // Get and parse balance properly
   const currentBalance = get(balance);
+  const currentBetsPlaced = get(betsPlaced);
+  const currentTotalBetAmount = get(totalBetAmount);
   
   if (typeof window === 'undefined') return;
   
@@ -68,8 +70,8 @@ export const handleCashOut = async () => {
         finalBalance: finalBalance,
         has_cashed_out_plinko: true,  // Updated to use Plinko-specific flag
         // Updated to track bets/amounts placed
-        bets_placed: currentBetsPlaced,
-        total_bet_amount: currentTotalBetAmount
+        betsplaced: currentBetsPlaced,
+        totalBetAmount: currentTotalBetAmount
       })
     });
 
@@ -81,10 +83,10 @@ export const handleCashOut = async () => {
     
     if (data.success) {
       balance.set(0);
-      // Redirect back to app after successful cash out
       // Reset tracking variables
       betsPlaced.set(0);
       totalBetAmount.set(0);
+      // Redirect back to app after successful cash out
       window.location.href = 'fitness305casino://cash-out-complete';
     } else {
       throw new Error('Cash out failed');
