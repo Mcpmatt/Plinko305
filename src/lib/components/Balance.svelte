@@ -23,6 +23,7 @@
     // Floor the final balance before sending
     const finalBalance = Math.floor($balance);
     const finalBetAmount = Math.floor($totalBetAmount);
+    const finalBetsPlaced = Math.floor($betsPlaced);
 
     if (!cloudFunctionUrl || !userId) {
       $cashOutError = 'Missing required parameters for cash out';
@@ -44,7 +45,7 @@
           uid: userId,
           finalBalance: finalBalance,   // Will always be a whole number
           has_cashed_out_plinko: true,
-          betsPlaced: betsPlaced,
+          betsPlaced: finalBetsPlaced,
           totalBetAmount: finalBetAmount
         })
       });
